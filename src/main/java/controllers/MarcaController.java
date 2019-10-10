@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import entidades.Marca;
 
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -36,5 +37,46 @@ public class MarcaController{
         return view;
     }
 
+    @GetMapping("/salvar")
+    public ModelAndView salvar(Marca marca){
+        ModelAndView view = new ModelAndView("marca/incluir-marca");
+        view.addObject("marca", marca);
+        return view;
+    }
+
+    @PostMapping("/salvar")
+    public ModelAndView salvar(@ModelAttribute("marca") @Valid Marca marca,
+            BindingResult bindingResult, RedirectAttributes redirAttr) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("marca/incluir-marca");
+        } else {
+            repositorio.save(marca);
+        }
+
+        ModelAndView view = new ModelAndView("redirect:/marca/lista");
+        redirAttr.addFlashAttribute("marca", marca);
+        return view;
+    }
+
+    @GetMapping("/alterar/{id}")
+    public ModelAndView alterar(@PathVariable("id") Integer id) {
+        ModelAndView view = new ModelAndView("marca/alterar-marca");
+        view.addObject("marca", repositorio.findById(id));
+        return view;
+    }
+
+    @PostMapping("/alterar")
+    public ModelAndView alterar(@ModelAttribute("marca") @Valid Marca marca,
+            BindingResult bindingResult, RedirectAttributes redirAttr) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("marca/incluir-marca");
+        } else {
+            repositorio.save(marca);
+        }
+
+        ModelAndView view = new ModelAndView("redirect:/marca/lista");
+        redirAttr.addFlashAttribute("marca", marca);
+        return view;
+    }
     
 }
