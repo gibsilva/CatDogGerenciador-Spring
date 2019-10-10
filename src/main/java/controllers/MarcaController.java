@@ -33,7 +33,7 @@ public class MarcaController{
     public ModelAndView listaMarcas(){
         List<Marca> marcas = repositorio.findAll();
         ModelAndView view = new ModelAndView("marca/lista-marca");
-        view.addObject("marca", marcas);
+        view.addObject("marcas", marcas);
         return view;
     }
 
@@ -50,6 +50,7 @@ public class MarcaController{
         if (bindingResult.hasErrors()) {
             return new ModelAndView("marca/incluir-marca");
         } else {
+            marca.setAtivo(true);
             repositorio.save(marca);
         }
 

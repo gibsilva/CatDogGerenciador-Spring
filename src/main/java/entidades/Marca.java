@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -37,11 +38,19 @@ public class Marca implements Serializable {
 
     @Column(name = "cnpj", nullable = false)
     @NotBlank(message = "Cnpj é obrigatorio")
+    @Size(min=14, max=14)
     private String cnpj;
 
     @Column(name = "ativo")
-    @NotBlank
     private boolean ativo;
+
+    
+    public boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+	}
 
 
 }

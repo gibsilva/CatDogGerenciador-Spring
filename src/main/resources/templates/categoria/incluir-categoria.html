@@ -2,7 +2,7 @@
 <html layout:decorate="~{header}">
 
 <head>
-    <title>Incluir Categoria</title>
+    <title>Cadastro de Categoria</title>
 </head>
 
 <body>
@@ -23,7 +23,6 @@
                         <span class="navbar-toggler-icon icon-bar"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end">
-
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
@@ -66,13 +65,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
                                                         <label class="bmd-label-floating">Nome da categoria</label>
-                                                        <input th:field="*{nome}" type="text" class="form-control" minlength="3" maxlength="50" id="categoria" name="categoria" required>
+                                                        <input th:field="*{nome}" type="text" class="form-control"  id="categoria" name="categoria" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
                                             <button type="submit" class="btn btn-success pull-right">Salvar</button>
-                                            <a th:href="@{/categoria/lista}" class="btn btn-danger pull-right">Cancelar</a>
+                                            <a th:href="@{/}" class="btn btn-danger pull-right">Cancelar</a>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

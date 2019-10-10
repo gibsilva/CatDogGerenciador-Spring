@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 @Data
@@ -39,10 +42,12 @@ public class Usuario implements Serializable{
     
     @Column(name="cpf", nullable=false)
     @NotBlank(message = "Campo obrigatório")
+    @Size(min=11, max=11)
     private String cpf;
 
     @Column(name="email", nullable=false)
     @NotBlank(message = "Campo obrigatório")
+    @Email
     private String email;
 
     @Column(name="permissao", nullable=false)
@@ -51,10 +56,10 @@ public class Usuario implements Serializable{
 
     @Column(name="senha", nullable=false)
     @NotBlank(message = "Campo obrigatório")
+    @Min(5)
     private String senha;
 
     @Column(name="ativo")
-    @NotBlank
     private Boolean ativo;
 
 }
