@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidades.Usuario;
+import entidades.enums.ETipoPermissao;
+
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,6 +41,7 @@ public class UsuarioController {
     @GetMapping("/salvar")
     public ModelAndView salvar(Usuario usuario){
         ModelAndView view = new ModelAndView("usuario/incluir-usuario");
+        view.addObject("permissoes", ETipoPermissao.values());
         view.addObject("usuario", usuario);
         return view;
     }
