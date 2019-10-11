@@ -37,11 +37,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/salvar")
-    public ModelAndView salvar(Usuario usuario) {
+    public ModelAndView salvar(Usuario usuario){
         ModelAndView view = new ModelAndView("usuario/incluir-usuario");
         view.addObject("usuario", usuario);
         return view;
     }
+    
 
     @PostMapping("/salvar")
     public ModelAndView salvar(@ModelAttribute("usuario") @Valid Usuario usuario,
