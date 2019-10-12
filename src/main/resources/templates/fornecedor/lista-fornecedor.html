@@ -1,7 +1,7 @@
 <html layout:decorate="~{header}">
 
 <head>
-    <title>Consulta de Marcas</title>
+    <title>Consulta de Fornecedores</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="#pablo">Consulta de Marcas</a>
+                        <a class="navbar-brand" href="#pablo">Consulta de Fornecedores</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-info">
-                                    <h4 class="card-title ">Marcas</h4>
-                                    <p class="card-category">Lista de marcas cadastradas</p>
+                                    <h4 class="card-title ">Fornecedores</h4>
+                                    <p class="card-category">Lista de fornecedores cadastrados</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -56,19 +56,36 @@
                                                 <tr>
                                                     <th class="text-center"><b>ID</b></th>
                                                     <th class="text-center"><b>Nome</b></th>
+                                                    <th class="text-center"><b>CNPJ</b></th>
+                                                    <th class="text-center"><b>CEP</b></th>
+                                                    <th class="text-center"><b>Logradouro</b></th>
+                                                    <th class="text-center"><b>Numero</b></th>
+                                                    <th class="text-center"><b>Complemento</b></th>
+                                                    <th class="text-center"><b>Bairro</b></th>
+                                                    <th class="text-center"><b>Cidade</b></th>
+                                                    <th class="text-center"><b>Estado</b></th>
                                                     <th class="text-center"><b>Status</b></th>
                                                     <th class="text-center"><b>Actions</b></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr th:each="c : ${marcas}">
+                                                <tr th:each="c : ${fornecedores}">
+
                                                     <td th:text="${c.id}" class="text-center"></td>
                                                     <td th:text="${c.nome}" class="text-center"></td>
+                                                    <td th:text="${c.cnpj}" class="text-center"></td>
+                                                    <td th:text="${c.cep}" class="text-center"></td>
+                                                    <td th:text="${c.logradouro}" class="text-center"></td>
+                                                    <td th:text="${c.numero}" class="text-center"></td>
+                                                    <td th:text="${c.complemento}" class="text-center"></td>
+                                                    <td th:text="${c.bairro}" class="text-center"></td>
+                                                    <td th:text="${c.cidade}" class="text-center"></td>
+                                                    <td th:text="${c.estado}" class="text-center"></td>
                                                     <td th:text="${c.ativo}" class="text-center"></td>
                                                     <td class="td-actions text-center">
-                                                        <a th:href="@{/marca/alterar/{id}(id=${c.id})}"
+                                                        <a th:href="@{/fornecedor/alterar/{id}(id=${c.id})}"
                                                             class="btn btn-link btn-success" data-toggle="tooltip"
-                                                            data-placement="left" title="Alterar Marca">
+                                                            data-placement="left" title="Alterar fornecedor">
                                                             <i class="fas fa-pen"></i></a>
                                                         <button type="button" rel="tooltip"
                                                             class="btn  btn-lg btn-link btn-danger">
@@ -95,6 +112,7 @@
                 </div>
             </div>
         </div>
+
     </main>
 </body>
 

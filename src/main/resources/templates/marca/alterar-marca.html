@@ -59,6 +59,7 @@
                                             </div>
                                     </div>
                                 </div> 
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
@@ -70,23 +71,15 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('cnpj')}? 'has-error'">
-                                            <label class="bmd-label-floating">CNPJ</label>
-                                            <input th:field="*{cnpj}" type="text" class="form-control" id="cnpj" name="cnpj" readonly value="${fornecedor.documento}">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('ativo')}? 'has-error'">
                                         <label class="bmd-label-floating" for="inputAtivo">Status</label>
                                         <select th:field="*{ativo}" id="ativo" name="ativo" class="custom-select">
-                                            <option th:value="'true'" th:text="Ativo"></option>
-                                            <option th:value="'false'" th:text="Inativo"></option>
+                                            <option>Ativo</option>
+                                            <option>Inativo</option>
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <br>
                                 <button type="submit" class="btn btn-success pull-right">Salvar</button>
                                 <a th:href="@{/marca/lista}" class="btn btn-danger pull-right">Cancelar</a>

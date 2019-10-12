@@ -67,14 +67,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('cnpj')}? 'has-error'">
-                                            <label class="bmd-label-floating">CNPJ</label>
-                                            <input th:field="*{cnpj}" type="text" class="form-control" id="cnpj" name="cnpj">
-                                        </div>
-                                    </div>
-                                </div>
                                 <br>
                                 <button type="submit" class="btn btn-success pull-right">Salvar</button>
                                 <a th:href="@{/categoria/lista}" class="btn btn-danger pull-right">Cancelar</a>
