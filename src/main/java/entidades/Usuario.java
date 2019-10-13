@@ -12,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import entidades.enums.ETipoPermissao;
 import lombok.Data;
 
 @Data
@@ -23,7 +22,7 @@ public class Usuario implements Serializable{
     public Usuario() { }
 
     public Usuario(int id, String nome, String cpf, 
-    String email, ETipoPermissao permissao, String senha,
+    String email, String permissao, String senha,
     Boolean ativo){
         this.id = id;
         this.nome = nome;
@@ -54,7 +53,7 @@ public class Usuario implements Serializable{
 
     @Column(name="permissao", nullable=false)
     @NotBlank(message = "Campo obrigatório")
-    private ETipoPermissao permissao;
+    private String permissao;
 
     @Column(name="senha", nullable=false)
     @NotBlank(message = "Campo obrigatório")

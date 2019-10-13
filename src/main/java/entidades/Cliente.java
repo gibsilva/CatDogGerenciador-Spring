@@ -5,7 +5,6 @@
  */
 package entidades;
 
-import entidades.enums.ETipoPermissao;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,15 +32,13 @@ public class Cliente implements Serializable {
     }
 
     public Cliente(int id, String nome, String cpf, String email,
-            Date dataNasc, ETipoPermissao permissao,
-            String senha, String cep) {
+            Date dataNasc, String senha, String cep) {
 
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.dataNasc = dataNasc;
-        this.permissao = permissao;
         this.senha = senha;
         this.cep = cep;
     }
@@ -68,10 +65,6 @@ public class Cliente implements Serializable {
     @NotBlank(message = "Campo obrigatório")
     @Size(min=10, max=10)
     private Date dataNasc;
-       
-    @Column(name="permissao", nullable=false)
-    @NotBlank(message = "Campo obrigatório")
-    private ETipoPermissao permissao;
     
     @Column(name="senha", nullable=false)
     @NotBlank(message = "Campo obrigatório")

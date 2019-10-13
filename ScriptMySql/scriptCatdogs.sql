@@ -111,7 +111,7 @@ CREATE TABLE usuario (
   Nome varchar(80) NOT NULL,
   Cpf varchar(11) NOT NULL,
   Email varchar(80) NOT NULL,
-  Permissao int(11) NOT NULL,
+  Permissao varchar(20) NOT NULL,
   Ativo bit(1) NOT NULL,
   Senha varchar(60) NOT NULL,
   DataHoraCriacao datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,

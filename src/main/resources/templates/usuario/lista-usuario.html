@@ -74,7 +74,7 @@
                                                     <th class="text-center"><b>ID</b></th>
                                                     <th class="text-center"><b>Nome</b></th>
                                                     <th class="text-center"><b>CPF</b></th>
-                                                    <th class="text-center"><b>Permissïção</b></th>
+                                                    <th class="text-center"><b>Permissão</b></th>
                                                     <th class="text-center"><b>Status</b></th>
                                                     <th class="text-center"><b>Ação</b></th>
                                                 </tr>
@@ -85,8 +85,8 @@
                                                     <td th:text="${c.nome}" class="text-center"></td>
                                                     <td th:text="${c.cpf}" class="text-center"></td>
                                                     <td th:text="${c.permissao}" class="text-center"></td>
-                                                    <td th:text="${c.ativo}" class="text-center"></td>
-                                                    <a th:href="@{/usuario/alterar/{id}(id=${c.id})}"
+                                                    <td th:text="${c.ativo} ? 'Ativo' : 'Inativo'" class="text-center"/>
+                                                    <td class="text-center"><a th:href="@{/usuario/alterar/{id}(id=${c.id})}"
                                                         class="btn btn-link btn-success" data-toggle="tooltip"
                                                         data-placement="left" title="Alterar Usuário">
                                                         <i class="fas fa-pen"></i></a>
