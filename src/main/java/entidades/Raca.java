@@ -9,9 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Data;
 
-@Data
 @Entity(name = "raca")
 public class Raca implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -30,4 +28,32 @@ public class Raca implements Serializable{
     @Column(name="nome", nullable=false)
     @NotBlank(message = "Nome da raça é obrigatório.")
     private String nome;
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

@@ -68,6 +68,8 @@ public class MarcaController {
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") Integer id) {
         ModelAndView view = new ModelAndView("marca/alterar-marca");
+        List<Fornecedor> fornecedores = fornecedorRepositorio.findAll();
+        view.addObject("fornecedores", fornecedores);
         view.addObject("marca", repositorio.findById(id));
         return view;
     }
@@ -85,5 +87,4 @@ public class MarcaController {
         redirAttr.addFlashAttribute("marca", marca);
         return view;
     }
-
 }

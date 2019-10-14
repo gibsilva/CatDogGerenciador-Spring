@@ -10,12 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
 @Data
-@Entity(name = "marca")
+@Entity
+@Table(name="marca")
 public class Marca implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,11 +54,7 @@ public class Marca implements Serializable {
         this.ativo = ativo;
     }
 
+    @ManyToOne
+    @JoinColumn(name="id", insertable = false, updatable = false)
     public Fornecedor fornecedor;
-
-    @ManyToOne()
-    @JoinColumn(name = "idfornecedor", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_Produto_Fornecedor_IdFornecedor"))
-    public Fornecedor getFornecedor() {
-        return this.fornecedor;
-    }
 }

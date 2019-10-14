@@ -1,30 +1,64 @@
 package controllers;
 
+import entidades.Produto;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import repositorios.ICategoriaRepositorio;
+import repositorios.IMarcaRepositorio;
+import repositorios.IProdutoRepositorio;
 
 @Controller
 @RequestMapping("/produto")
-public class ProdutoController{
+public class ProdutoController {
 
-    @GetMapping("/salvar")
-    public String produto (){
-        return "incluir-produto";
+    private final IProdutoRepositorio produtoRepositorio;
+    private final ICategoriaRepositorio categoriaRepositorio;
+    private final IMarcaRepositorio marcaRepositorio;
+
+    @Autowired
+    public ProdutoController(IProdutoRepositorio produtoRepositorio,
+            ICategoriaRepositorio categoriaRepositorio,
+            IMarcaRepositorio marcaRepositorio) {
+        this.produtoRepositorio = produtoRepositorio;
+        this.categoriaRepositorio = categoriaRepositorio;
+        this.marcaRepositorio = marcaRepositorio;
     }
 
-    @GetMapping("/alterar")
-    public String produtoAlterar (){
-        return "alterar-produto";
+    @GetMapping("/salvar")
+    public ModelAndView produto(Produto produto) {
+        ModelAndView view = new ModelAndView("produto/incluir-produto");
+        view.addObject("categorias", categoriaRepositorio.findAll());
+        view.addObject("marcas", marcaRepositorio.findAll());
+        view.addObject("produto", produto);
+        return view;
+    }
+
+    @GetMapping("/alterar/{id}")
+    public ModelAndView produtoAlterar(@PathVariable("id") Integer id) {
+        ModelAndView view = new ModelAndView("produto/alterar-produto");
+        view.addObject("categorias", categoriaRepositorio.findAll());
+        view.addObject("marcas", marcaRepositorio.findAll());
+        view.addObject("produto", produtoRepositorio.findById(id));
+        return view;
     }
 
     @GetMapping("/lista")
-    public String produtoLista (){
-        return "lista-produto";
+    public ModelAndView listaProdutos() {
+        List<Produto> produtos = produtoRepositorio.findAll();
+        ModelAndView view = new ModelAndView("produto/lista-produto");
+        view.addObject("produtos", produtos);
+        return view;
     }
 
-    @GetMapping("/detalhes")
-    public String produtoDetalhes (){
-        return "detalhes-produto";
+    @GetMapping("/detalhes/{id}")
+    public ModelAndView produtoDetalhes(@PathVariable("id") Integer id) {
+        ModelAndView view = new ModelAndView("produto/detalhes-produto");
+        view.addObject("produto", produtoRepositorio.findById(id));
+        return view;
     }
 }
