@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidades.Fornecedor;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
@@ -47,9 +48,11 @@ public class FornecedorController {
     @PostMapping("/salvar")
     public ModelAndView salvar(@ModelAttribute("fornecedor") @Valid Fornecedor fornecedor,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
+        fornecedor.setAtivo(true);
+        
         if (bindingResult.hasErrors()) {
             return new ModelAndView("fornecedor/incluir-fornecedor");
-        } else {
+        } else {         
             repositorio.save(fornecedor);
         }
 
@@ -61,7 +64,8 @@ public class FornecedorController {
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") Integer id) {
         ModelAndView view = new ModelAndView("fornecedor/alterar-fornecedor");
-        view.addObject("fornecedor", repositorio.findById(id));
+        Optional<Fornecedor> fornecedor = repositorio.findById(id);
+        view.addObject("fornecedor", fornecedor);
         return view;
     }
 

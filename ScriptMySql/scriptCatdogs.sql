@@ -28,6 +28,7 @@ CREATE TABLE marca (
 	Id int NOT NULL AUTO_INCREMENT,
     Nome varchar(150) NOT NULL,
     IdFornecedor int NOt NULL,
+    Ativo bit(1) NOT NULL,
     PRIMARY KEY (Id),
     KEY IX_Produto_IdFornecedor (IdFornecedor),
     CONSTRAINT FK_Produto_Fornecedor_IdFornecedor FOREIGN KEY (IdFornecedor) REFERENCES fornecedor (Id)
@@ -81,7 +82,7 @@ CREATE TABLE cliente (
   Email varchar(80) NOT NULL,
   Senha varchar(16) NOT NULL,
   DataNasc datetime NOT NULL,
-  TelefoneContato varchar(13) NOT NULL,
+  Telefone varchar(13) NOT NULL,
   Celular varchar(13) DEFAULT NULL,
   Sexo varchar(1) NOT NULL,
   DataHoraCriacao datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -30,7 +30,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/lista")
-    public ModelAndView listaCategorias() {
+    public ModelAndView listaUsuarios() {
         List<Usuario> usuarios = repositorio.findAll();
         ModelAndView view = new ModelAndView("usuario/lista-usuario");
         view.addObject("usuarios", usuarios);
@@ -49,6 +49,10 @@ public class UsuarioController {
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         usuario.setAtivo(true);
         
+        if(usuario.getSenha().length() < 6 || usuario.getSenha().length() > 12){
+            bindingResult.reject("senha", "A senha deve ter o tamanho entre 6 e 12 caracteres");
+        }
+        
         if(repositorio.findByEmail(usuario.getEmail()) != null)
             bindingResult.reject("email", "E-mail já cadastrado");
         
@@ -58,6 +62,7 @@ public class UsuarioController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("usuario/incluir-usuario");
         } else {
+            usuario.setSenhaEncriptada(usuario.getSenha());
             repositorio.save(usuario);
         }
 

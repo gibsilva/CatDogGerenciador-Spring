@@ -13,54 +13,79 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
+import org.mindrot.jbcrypt.BCrypt;
 
 @Data
 @Entity(name = "usuario")
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    public Usuario() { }
+    public Usuario() {
+    }
 
-    public Usuario(int id, String nome, String cpf, 
-    String email, String permissao, String senha,
-    Boolean ativo){
+    public Usuario(int id, String nome, String cpf,
+            String email, String permissao, String senha,
+            Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.permissao = permissao;
-        this.senha = senha;
+        if (senha.length() == 60) {
+            this.senha = senha;
+        } else {
+            setSenhaEncriptada(senha);
+        }
+        this.ativo = ativo;
+    }
+
+    public Usuario(int id, String nome, String cpf,
+            String email, String permissao, Boolean ativo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.permissao = permissao;
         this.ativo = ativo;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @Column(name="nome", nullable=false)
+
+    @Column(name = "nome", nullable = false)
     @NotBlank(message = "Campo obrigatório")
     private String nome;
-    
-    @Column(name="cpf", nullable=false)
+
+    @Column(name = "cpf", nullable = false)
     @NotBlank(message = "Campo obrigatório")
-    @Size(min=11, max=11)
+    @Size(min = 11, max = 11)
     private String cpf;
 
-    @Column(name="email", nullable=false)
+    @Column(name = "email", nullable = false)
     @NotBlank(message = "Campo obrigatório")
     @Email
     private String email;
 
-    @Column(name="permissao", nullable=false)
+    @Column(name = "permissao", nullable = false)
     @NotBlank(message = "Campo obrigatório")
     private String permissao;
 
-    @Column(name="senha", nullable=false)
+    @Column(name = "senha", nullable = false)
     @NotBlank(message = "Campo obrigatório")
-    @Min(5)
     private String senha;
 
-    @Column(name="ativo")
+    @Column(name = "ativo")
     private Boolean ativo;
+
+    public final void setSenhaEncriptada(String senha) {
+        this.senha = BCrypt.hashpw(senha, BCrypt.gensalt(12));
+    }
+
+    public boolean validarSenha(String senha) {
+        boolean senhaValida = BCrypt.checkpw(senha, this.getSenha());
+        return senhaValida;
+    }
 
 }

@@ -17,13 +17,14 @@ import lombok.Data;
 public class Fornecedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
-	
-    public Fornecedor() { }
-    
-    public Fornecedor(int id, String nome, String cnpj, 
-    boolean ativo, String cep, String logradouro, 
-    String numero, String complemento, String bairro,
-    String cidade, String estado) {
+
+    public Fornecedor() {
+    }
+
+    public Fornecedor(int id, String nome, String cnpj,
+            boolean ativo, String cep, String logradouro,
+            String numero, String complemento, String bairro,
+            String cidade, String estado) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -35,50 +36,56 @@ public class Fornecedor implements Serializable {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
-     }
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    @NotBlank
+    @Column(name = "nome")
+    @NotBlank(message = "Campo obrigatório")
+    @Size(min = 5, max = 150)
     private String nome;
 
-    @Column
-    @NotBlank
-    @Size(min = 14,max = 14)
+    @Column(name = "cnpj")
+    @NotBlank(message = "Campo obrigatório")
+    @Size(min = 14, max = 14, message = "O campo deve ter {max} caracteres")
     private String cnpj;
 
-    @Column
-    @NotBlank
+    @Column(name = "ativo")
     private boolean ativo;
 
-    @Column
-    @NotBlank
+    @Column(name = "cep")
+    @NotBlank(message = "Campo obrigatório")
+    @Size(min = 8, max = 8, message = "O campo deve ter {max} caracteres")
     private String cep;
 
-    @Column
-    @NotBlank
+    @Column(name = "logradouro")
+    @NotBlank(message = "Campo obrigatório")
+    @Size(min = 2, max = 80, message = "O campo deve ter entre {min} e {max} caracteres")
     private String logradouro;
 
-    @Column
-    @NotBlank
+    @Column(name = "numero")
+    @NotBlank(message = "Campo obrigatório")
     private String numero;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     private String complemento;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     private String bairro;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     private String cidade;
 
     @Column
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     private String estado;
+    
+    public void setAtivo(boolean ativo){
+        this.ativo = ativo;
+    }
 }

@@ -81,7 +81,7 @@
                                                     <td th:text="${c.bairro}" class="text-center"></td>
                                                     <td th:text="${c.cidade}" class="text-center"></td>
                                                     <td th:text="${c.estado}" class="text-center"></td>
-                                                    <td th:text="${c.ativo}" class="text-center"></td>
+                                                    <td th:text="${c.ativo}? 'Ativo' : 'Inativo'" class="text-center"></td>
                                                     <td class="td-actions text-center">
                                                         <a th:href="@{/fornecedor/alterar/{id}(id=${c.id})}"
                                                             class="btn btn-link btn-success" data-toggle="tooltip"
