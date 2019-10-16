@@ -31,7 +31,7 @@ public class Categoria implements Serializable {
     private Integer id;
 
     @Column(name = "nome", nullable = false)
-    @NotBlank(message = "Campo nome da categoria é obrigatório")
+    @NotBlank(message = "Nome da categoria é obrigatório")
     private String nome;
     
     @OneToMany(mappedBy="categoria")

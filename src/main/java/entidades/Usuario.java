@@ -51,26 +51,26 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome", nullable = false)
-    @NotBlank(message = "Campo obrigatório")
+    @Column(name = "nome")
+    @NotBlank(message = "Nome obrigatório")
     private String nome;
 
-    @Column(name = "cpf", nullable = false)
-    @NotBlank(message = "Campo obrigatório")
+    @Column(name = "cpf")
+    @NotBlank(message = "Cpf obrigatório")
     @Size(min = 11, max = 11)
     private String cpf;
 
-    @Column(name = "email", nullable = false)
-    @NotBlank(message = "Campo obrigatório")
+    @Column(name = "email")
+    @NotBlank(message = "Email obrigatório")
     @Email
     private String email;
 
-    @Column(name = "permissao", nullable = false)
-    @NotBlank(message = "Campo obrigatório")
+    @Column(name = "permissao")
+    @NotBlank(message = "Permissão obrigatória")
     private String permissao;
 
-    @Column(name = "senha", nullable = false)
-    @NotBlank(message = "Campo obrigatório")
+    @Column(name = "senha")
+    @NotBlank(message = "Senha obrigatória")
     private String senha;
 
     @Column(name = "ativo")

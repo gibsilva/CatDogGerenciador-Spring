@@ -68,7 +68,7 @@ public class CategoriaController {
     public ModelAndView alterar(@ModelAttribute("categoria") @Valid Categoria categoria,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("categoria/incluir-categoria");
+            return new ModelAndView("categoria/alterar-categoria");
         } else {
             repositorio.save(categoria);
         }

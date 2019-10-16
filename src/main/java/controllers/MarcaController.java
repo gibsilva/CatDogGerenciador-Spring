@@ -78,7 +78,7 @@ public class MarcaController {
     public ModelAndView alterar(@ModelAttribute("marca") @Valid Marca marca,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("marca/incluir-marca");
+            return new ModelAndView("marca/alterar-marca");
         } else {
             repositorio.save(marca);
         }

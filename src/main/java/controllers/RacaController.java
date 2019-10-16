@@ -68,7 +68,7 @@ public class RacaController {
     public ModelAndView alterar(@ModelAttribute("raca") @Valid Raca raca,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("raca/incluir-raca");
+            return new ModelAndView("raca/alterar-raca");
         } else {
             repositorio.save(raca);
         }

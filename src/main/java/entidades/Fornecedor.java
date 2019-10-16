@@ -44,46 +44,45 @@ public class Fornecedor implements Serializable {
     private Integer id;
 
     @Column(name = "nome")
-    @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Nome obrigatório")
     @Size(min = 5, max = 150)
     private String nome;
 
     @Column(name = "cnpj")
-    @NotBlank(message = "Campo obrigatório")
-    @Size(min = 14, max = 14, message = "O campo deve ter {max} caracteres")
+    @NotBlank(message = "Cnpj obrigatório")
+    @Size(min = 14, max = 14, message = "O campo cnpj deve ter {max} caracteres")
     private String cnpj;
 
     @Column(name = "ativo")
     private boolean ativo;
 
     @Column(name = "cep")
-    @NotBlank(message = "Campo obrigatório")
-    @Size(min = 8, max = 8, message = "O campo deve ter {max} caracteres")
+    @NotBlank(message = "Cep obrigatório")
+    @Size(min = 8, max = 8, message = "O campo cep deve ter {max} caracteres")
     private String cep;
 
     @Column(name = "logradouro")
-    @NotBlank(message = "Campo obrigatório")
-    @Size(min = 2, max = 80, message = "O campo deve ter entre {min} e {max} caracteres")
+    @NotBlank(message = "Logradouro obrigatório")
+    @Size(min = 2, max = 80, message = "O campo logradouro deve ter entre {min} e {max} caracteres")
     private String logradouro;
 
     @Column(name = "numero")
-    @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Numero obrigatório")
     private String numero;
 
     @Column
-    @NotBlank(message = "Campo obrigatório")
     private String complemento;
 
     @Column
-    @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Bairro obrigatório")
     private String bairro;
 
     @Column
-    @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Cidade obrigatório")
     private String cidade;
 
     @Column
-    @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Estado obrigatório")
     private String estado;
     
     @OneToMany(mappedBy="fornecedor")

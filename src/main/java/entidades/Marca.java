@@ -38,7 +38,7 @@ public class Marca implements Serializable {
     private Integer id;
 
     @Column(name = "nome", nullable = false)
-    @NotBlank(message = "Campo Obrigatório")
+    @NotBlank(message = "Nome Obrigatório")
     private String nome;
 
     @Column(name = "idfornecedor", nullable = false)

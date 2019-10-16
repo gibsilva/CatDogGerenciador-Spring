@@ -70,8 +70,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
-                                                        <label class="bmd-label-floating cpf">CPF</label>
-                                                        <input th:field="*{cpf}" type="text" class="form-control" id="cpf" name="cpf" required maxlength="11" minlength="11">
+                                                        <label class="bmd-label-floating">CPF</label>
+                                                        <input th:field="*{cpf}" type="text" class="form-control " id="cpf" name="cpf" required maxlength="11" minlength="11">
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,10 +124,7 @@
                      style="top: 0px; height: 316px;"></div>
             </div>
 
-            <script
-                src="https://code.jquery.com/jquery-3.4.1.min.js"
-                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+          
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
             <script th:inline="javascript">
                 $(document).ready(function () {

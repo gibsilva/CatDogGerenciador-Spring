@@ -82,7 +82,7 @@ public class UsuarioController {
     public ModelAndView alterar(@ModelAttribute("usuario") @Valid Usuario usuario,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("usuario/incluir-usuario");
+            return new ModelAndView("usuario/alterar-usuario");
         } else {
             repositorio.save(usuario);
         }

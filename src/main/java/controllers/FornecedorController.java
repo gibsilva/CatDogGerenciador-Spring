@@ -73,7 +73,7 @@ public class FornecedorController {
     public ModelAndView alterar(@ModelAttribute("fornecedor") @Valid Fornecedor fornecedor,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("fornecedor/incluir-fornecedor");
+            return new ModelAndView("fornecedor/alterar-fornecedor");
         } else {
             repositorio.save(fornecedor);
         }
