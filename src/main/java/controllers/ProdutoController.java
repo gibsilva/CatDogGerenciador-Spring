@@ -1,6 +1,8 @@
 package controllers;
 
 import entidades.Produto;
+import entidades.enums.EPorteAnimal;
+import entidades.enums.ETipoAnimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,8 @@ public class ProdutoController {
         ModelAndView view = new ModelAndView("produto/incluir-produto");
         view.addObject("categorias", categoriaRepositorio.findAll());
         view.addObject("marcas", marcaRepositorio.findAll());
+        view.addObject("tipoAnimais", ETipoAnimal.values());
+        view.addObject("porteAnimais", EPorteAnimal.values());
         view.addObject("produto", produto);
         return view;
     }

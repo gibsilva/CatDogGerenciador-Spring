@@ -50,134 +50,87 @@
                                     <p class="card-category">Adicione um novo produto</p>
                                 </div>
                                 <div class="card-body">
-                                    <form action="incluir-produto" method="post" enctype="multipart/form-data">
+                                    <form th:object="${produto}" th:action="@{/produto/salvar}" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group row">
+                                            <div class="" th:if="${#fields.hasAnyErrors()}">
+                                                    <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                                        <li class="text-danger"><span th:text="${detailedError.message}"></span></li>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group bmd-form-group">
                                                     <label class="bmd-label-floating">Nome/Título</label>
-                                                    <input type="text" class="form-control" id="nomeProduto"
+                                                    <input th:field="*{nome}" type="text" class="form-control" id="nomeProduto"
                                                         name="nomeProduto" required>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
-                                                <div class="form-group bmd-form-group">
-                                                    <label class="bmd-label-floating">Quantidade</label>
-                                                    <input type="number" class="form-control" id="quantidade"
-                                                        name="quantidade" required>
+                                                    <div class="form-group bmd-form-group">
+                                                        <label class="bmd-label-floating">Quantidade</label>
+                                                        <input th:field="*{quantidade}" type="number" class="form-control" id="quantidade" name="quantidade" required>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
-
                                         <div class="row">
-                                            <div class="form-group col-md-2">
-                                                <label class="bmd-label-floating" for="inputState">Tipo de
-                                                    Animal</label>
-                                                <select id="inputState" class="form-control" id="tipoAnimal"
-                                                    name="tipoAnimal" required>
-                                                    <option selected>Selecione</option>
-                                                    <c:forEach var="c" items="${tipoAnimal}">
-                                                        <option value="${c.getOpcao()}">${c.toString()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group col-md-2">
-                                                <label class="bmd-label-floating" for="inputState">Categoria</label>
-                                                <select id="inputState" class="form-control" id="categoria"
-                                                    name="categoria" required>
-                                                    <option selected>Selecione</option>
-                                                    <c:forEach var="c" items="${categorias}">
-                                                        <option value="${c.id}">${c.nome}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group col-md-2">
-                                                <label class="bmd-label-floating" for="inputState">Porte de
-                                                    Animal</label>
-                                                <select id="inputState" class="form-control" id="porteAnimal"
-                                                    name="porteAnimal">
-                                                    <option selected>Selecione</option>
-                                                    <c:forEach var="c" items="${porteAnimal}">
-                                                        <option value="${c.getOpcao()}">${c.toString()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label class="bmd-label-floatin" for="inputState">Fornecedor</label>
-                                                <select id="inputState" class="form-control" id="fornecedor"
-                                                    name="fornecedor" required>
-                                                    <option selected>Selecione</option>
-                                                    <c:forEach var="c" items="${fornecedores}">
-                                                        <option value="${c.id}">${c.nome}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
+                                                <div class="form-group col-md-2">
+                                                    <label class="bmd-label-floating" for="inputState">Tipo de Animal</label>
+                                                    <select th:field="*{eTipoAnimal}" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+                                                        <option th:each="i : ${tipoAnimais}" th:value="${i.getOpcao()}" th:text="${i.toString()}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label class="bmd-label-floating" for="inputState">Categoria</label>
+                                                    <select th:field="*{idCategoria}" class="form-control" id="categoria" name="categoria" required>
+                                                            <option th:each="i : ${categorias}" th:value="${i.id}" th:text="${i.nome}">
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label class="bmd-label-floating" for="inputState">Porte de Animal</label>
+                                                    <select th:field="*{ePorteAnimal}" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+                                                        <option th:each="i : ${porteAnimais}" th:value="${i.getOpcao()}" th:text="${i.toString()}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label class="bmd-label-floating" for="inputState">Marca</label>
+                                                    <select th:field="*{idMarca}" class="form-control" id="marca" name="marca" required>
+                                                             <option th:each="i : ${marcas}" th:value="${i.id}" th:text="${i.nome}">
+                                                    </select>
+                                                </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group bmd-form-group">
                                                     <label class="bmd-label-floating">Descrição</label>
-                                                    <textarea class="form-control" rows="2" maxlength="100"
-                                                        id="descricao" name="descricao" required=""></textarea>
+                                                    <textarea th:field="*{descricao}" class="form-control" rows="2"  
+                                                    maxlength="300" id="descricao" name="descricao" required=""></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group bmd-form-group">
                                                     <label class="bmd-label-floating">Especificação</label>
-                                                    <textarea class="form-control" rows="2" maxlength="300"
+                                                    <textarea th:field="*{especificacao}" class="form-control" rows="2" maxlength="300" 
                                                         id="especificacao" name="especificacao" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-group bmd-form-group">
-                                                    <label class="bmd-label-floating">Preço Compra</label>
-                                                    <input type="text" class="form-control" id="precoCompra"
-                                                        name="precoCompra" required>
+                                                <div class="col-md-2">
+                                                    <div class="form-group bmd-form-group">
+                                                        <label class="bmd-label-floating">Preço Compra</label>
+                                                        <input th:field="*{precoCompra}" type="text" class="form-control" id="precoCompra" name="precoCompra" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <div class="form-group bmd-form-group">
-                                                    <label class="bmd-label-floating">Preço Venda</label>
-                                                    <input type="text" class="form-control" id="precoVenda"
-                                                        name="precoVenda" required>
+            
+                                                <div class="col-md-2">
+                                                    <div class="form-group bmd-form-group">
+                                                        <label class="bmd-label-floating">Preço Venda</label>
+                                                        <input th:field="*{precoVenda}" type="text" class="form-control" id="precoVenda" name="precoVenda" required>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="form-group form-file-upload form-file-multiple col-md-6">
-                                                <input type="file" name="imagem" id="imagem" multiple="file"
-                                                    class="inputFileHidden" accept="image/png, image/jpeg, image/jpg">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control inputFileVisible"
-                                                        placeholder="Selecionar Imagens" multiple>
-                                                    <span class="input-group-btn">
-                                                        <button id="fileInput" onclick="escolherImagem()" type="button"
-                                                            class="btn btn-fab btn-round btn-info">
-                                                            <i class="material-icons">layers</i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-2">
-                                                <label class="bmd-label-floating" for="inputState">Status</label>
-                                                <select id="inputState" class="form-control" id="ativo" name="ativo"
-                                                    required>
-                                                    <option selected value="true">Ativo</option>
-                                                    <option value="false">Inativo</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
                                         <br>
                                         <button type="submit" class="btn btn-success pull-right">Salvar</button>
                                         <a href="dashboard" type="" class="btn btn-danger pull-right">Cancelar</a>

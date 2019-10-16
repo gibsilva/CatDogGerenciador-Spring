@@ -1,15 +1,16 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -17,7 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="marca")
+@Table(name = "marca")
 public class Marca implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +47,13 @@ public class Marca implements Serializable {
     @Column(name = "ativo")
     private boolean ativo;
 
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    public Fornecedor fornecedor;
+
+    @OneToMany(mappedBy = "marca")
+    List<Produto> produtos;
+
     public boolean getAtivo() {
         return ativo;
     }
@@ -53,8 +61,4 @@ public class Marca implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
-    @ManyToOne
-    @JoinColumn(name="id", insertable = false, updatable = false)
-    public Fornecedor fornecedor;
 }
