@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/10/2019, 20:51:41
+    Author     : Lemontech
+*/
+.sidebar .sidebar-wrapper {
+  position: relative;
+  height: calc(100vh - 75px);
+  overflow: auto !important;
+  width: 260px;
+  z-index: 4;
+  padding-bottom: 30px;
+}
+
