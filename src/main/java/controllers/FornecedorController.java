@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidades.Fornecedor;
+import helpers.Utils;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import repositorios.IFornecedorRepositorio;
+import services.FornecedorService;
 
 @Controller
 @RequestMapping("/fornecedor")
 public class FornecedorController {
 
     private final IFornecedorRepositorio repositorio;
+    FornecedorService service;
+    
 
     @Autowired
     public FornecedorController(IFornecedorRepositorio repositorio) {
@@ -49,10 +53,17 @@ public class FornecedorController {
     public ModelAndView salvar(@ModelAttribute("fornecedor") @Valid Fornecedor fornecedor,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
         fornecedor.setAtivo(true);
+
+        //retirar pontos e traços do CNPJ
+        fornecedor.setCnpj(Utils.removePontosBarraStr(fornecedor.getCnpj()));
         
+        if (!service.validarCnpj(fornecedor.getCnpj())) {
+            bindingResult.reject("cnpj", "cnpj inválido");
+        }
+
         if (bindingResult.hasErrors()) {
             return new ModelAndView("fornecedor/incluir-fornecedor");
-        } else {         
+        } else {
             repositorio.save(fornecedor);
         }
 
@@ -72,6 +83,10 @@ public class FornecedorController {
     @PostMapping("/alterar")
     public ModelAndView alterar(@ModelAttribute("fornecedor") @Valid Fornecedor fornecedor,
             BindingResult bindingResult, RedirectAttributes redirAttr) {
+
+        //retirar pontos e traços do CNPJ
+        fornecedor.setCnpj(Utils.removePontosBarraStr(fornecedor.getCnpj()));
+        
         if (bindingResult.hasErrors()) {
             return new ModelAndView("fornecedor/alterar-fornecedor");
         } else {

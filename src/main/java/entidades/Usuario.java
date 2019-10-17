@@ -57,7 +57,7 @@ public class Usuario implements Serializable {
 
     @Column(name = "cpf")
     @NotBlank(message = "Cpf obrigatório")
-    @Size(min = 11, max = 11)
+    @Size(min = 11, max = 14)
     private String cpf;
 
     @Column(name = "email")

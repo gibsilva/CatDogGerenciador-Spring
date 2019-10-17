@@ -55,6 +55,7 @@
                                     </div>
                                     <div class="card-body">
                                         <form th:object="${usuario}" th:action="@{/usuario/alterar}" method="POST">
+                                            <input th:field="*{id}" type="hidden" id="id" name="id">
                                             <div class="form-group row">
                                                 <div class="" th:if="${#fields.hasAnyErrors()}">
                                                     <div th:each="detailedError : ${#fields.detailedErrors()}">
@@ -72,7 +73,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group bmd-form-group" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
                                                         <label class="bmd-label-floating">CPF</label>
-                                                        <input th:field="*{cpf}" type="text" class="form-control" maxlength="11" minlength="11" id="cpf" name="cpf" readonly>
+                                                        <input th:field="*{cpf}" type="text" class="form-control cpf" maxlength="14" minlength="14" id="cpf" name="cpf" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,6 +84,8 @@
                                                         <input th:field="*{email}" type="email" class="form-control" id="email" name="email" required>
                                                     </div>
                                                 </div>
+                                                
+                                                <input th:field="*{senha}" type="hidden" id="senha" name="senha">
                                             </div>
 
                                             <div class="row">

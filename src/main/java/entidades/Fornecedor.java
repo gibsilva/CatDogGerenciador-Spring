@@ -50,7 +50,7 @@ public class Fornecedor implements Serializable {
 
     @Column(name = "cnpj")
     @NotBlank(message = "Cnpj obrigatório")
-    @Size(min = 14, max = 14, message = "O campo cnpj deve ter {max} caracteres")
+    @Size(min = 14, max = 18, message = "O campo cnpj deve ter {max} caracteres")
     private String cnpj;
 
     @Column(name = "ativo")
