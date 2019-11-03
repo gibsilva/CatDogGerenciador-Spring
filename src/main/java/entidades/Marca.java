@@ -18,7 +18,6 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "marca")
 public class Marca implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,4 +60,5 @@ public class Marca implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+    
 }

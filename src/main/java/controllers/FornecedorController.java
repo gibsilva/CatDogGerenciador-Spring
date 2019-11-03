@@ -26,9 +26,8 @@ import services.FornecedorService;
 public class FornecedorController {
 
     private final IFornecedorRepositorio repositorio;
-    FornecedorService service;
+    FornecedorService service = new FornecedorService();
     
-
     @Autowired
     public FornecedorController(IFornecedorRepositorio repositorio) {
         this.repositorio = repositorio;
@@ -58,7 +57,7 @@ public class FornecedorController {
         fornecedor.setCnpj(Utils.removePontosBarraStr(fornecedor.getCnpj()));
         
         if (!service.validarCnpj(fornecedor.getCnpj())) {
-            bindingResult.reject("cnpj", "cnpj inválido");
+            bindingResult.reject("cnpj", "CNPJ inválido");
         }
 
         if (bindingResult.hasErrors()) {

@@ -42,7 +42,7 @@ public class Imagem implements Serializable {
     @NotBlank(message = "Campo nome é obrigatório")
     private String tipo;
 
-    @Column(name = "idProduto", nullable = false)
+    @Column(name = "idproduto", nullable = false)
     private int idProduto;
 
     @ManyToOne

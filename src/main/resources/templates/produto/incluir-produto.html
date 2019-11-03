@@ -50,15 +50,14 @@
                                     <p class="card-category">Adicione um novo produto</p>
                                 </div>
                                 <div class="card-body">
-                                    <form th:object="${produto}" th:action="@{/produto/salvar}" method="post"
-                                        enctype="multipart/form-data">
+                                    <form th:object="${produto}" th:action="@{/produto/salvar}" method="post" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <div class="" th:if="${#fields.hasAnyErrors()}">
                                                     <div th:each="detailedError : ${#fields.detailedErrors()}">
                                                         <li class="text-danger"><span th:text="${detailedError.message}"></span></li>
                                                     </div>
                                                 </div>
-                                            </div> 
+                                         </div> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group bmd-form-group">
@@ -77,7 +76,7 @@
                                         <div class="row">
                                                 <div class="form-group col-md-2">
                                                     <label class="bmd-label-floating" for="inputState">Tipo de Animal</label>
-                                                    <select th:field="*{eTipoAnimal}" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+                                                    <select th:field="*{tipoAnimal}" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
                                                         <option th:each="i : ${tipoAnimais}" th:value="${i.getOpcao()}" th:text="${i.toString()}"></option>
                                                     </select>
                                                 </div>
@@ -89,7 +88,7 @@
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label class="bmd-label-floating" for="inputState">Porte de Animal</label>
-                                                    <select th:field="*{ePorteAnimal}" class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+                                                    <select th:field="*{porteAnimal}" class="form-control" id="porteAnimal" name="porteAnimal" required>
                                                         <option th:each="i : ${porteAnimais}" th:value="${i.getOpcao()}" th:text="${i.toString()}"></option>
                                                     </select>
                                                 </div>
@@ -130,7 +129,21 @@
                                                         <input th:field="*{precoVenda}" type="text" class="form-control" id="precoVenda" name="precoVenda" required>
                                                     </div>
                                                 </div>
+                                                
                                         </div>
+		                                <div class="row">
+		                                    <div class="form-group form-file-upload form-file-multiple col-md-6">
+		                                        <input type="file" name="imagem" id="imagem" multiple="file" class="inputFileHidden" accept="image/png, image/jpeg, image/jpg">
+		                                        <div class="input-group">
+		                                            <input type="text" class="form-control inputFileVisible" placeholder="Selecionar Imagens" multiple>
+		                                            <span class="input-group-btn">
+		                                                <button id="fileInput" type="button" class="btn btn-fab btn-round btn-info">
+		                                                    <i class="material-icons">layers</i>
+		                                                </button>
+		                                            </span>
+		                                        </div>
+		                                    </div>
+		                                </div>
                                         <br>
                                         <button type="submit" class="btn btn-success pull-right">Salvar</button>
                                         <a href="dashboard" type="" class="btn btn-danger pull-right">Cancelar</a>
@@ -153,9 +166,8 @@
             <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 88px;">
             </div>
         </div>
-    </main>
-
-    <script>
+        
+    <script th:inline="javascript">
         // FileInput
         $('.form-file-simple .inputFileVisible').click(function () {
             $(this).siblings('.inputFileHidden').trigger('click');
@@ -191,6 +203,7 @@
             $(this).parent().siblings().trigger('focusout');
         });
     </script>
+    </main>
 
 </body>
 

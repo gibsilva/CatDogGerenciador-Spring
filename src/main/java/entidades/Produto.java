@@ -1,7 +1,5 @@
 package entidades;
 
-import entidades.enums.EPorteAnimal;
-import entidades.enums.ETipoAnimal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,58 +24,61 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome")
     @NotBlank(message = "Campo nome é obrigatório")
     private String nome;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     @NotBlank(message = "Campo descrição é obrigatório")
     private String descricao;
 
-    @Column(name = "especificacao", nullable = false)
+    @Column(name = "especificacao")
     @NotBlank(message = "Campo especificação é obrigatório")
     private String especificacao;
 
+    @Column(name = "precocompra")
     @NotNull(message = "O preço de compra é obrigatório")
     @Digits(integer = 9, fraction = 2)
     private BigDecimal precoCompra;
 
+    @Column(name = "precovenda")
     @NotNull(message = "O preço de venda é obrigatório")
     @Digits(integer = 9, fraction = 2)
     private BigDecimal precoVenda;
 
-    @Column(name = "quantidade", nullable = false)
-    @NotNull
+    @Column(name = "quantidade")
+    @NotNull(message = "A quantidade é obrigatória")
     private int quantidade;
 
-    @NotNull
-    @Column(name = "ativo", nullable = false)
+    @Column(name = "ativo")
     private boolean ativo;
 
-    @Column(name = "idCategoria", nullable = false)
+    @NotNull(message = "A categoria é obrigatória")
+    @Column(name = "idcategoria")
     private int idCategoria;
 
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "id", insertable = false, updatable = false)
     private Categoria categoria;
 
-    @Column(name = "idMarca", nullable = false)
+    @Column(name = "idmarca")
+    @NotNull(message="A marca é obrigatória")
     private int idMarca;
 
     @ManyToOne
     @JoinColumn(name = "id", insertable = false, updatable = false)
     private Marca marca;
 
-    @OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "produto")
     private transient List<Imagem> imagens;
 
-    //@Column(name="tipoanimal")
-    //private int tipoAnimal;
-    @Column(name = "tipoanimal")
-    private ETipoAnimal eTipoAnimal;
-
-    @Column(name = "porteanimal")
-    private EPorteAnimal ePorteAnimal;
+    @Column(name="tipoanimal")
+    @NotNull(message="O tipo de animal é obrigatório")
+    private int tipoAnimal;
+    
+    @Column(name="porteanimal")
+    @NotNull(message="O porte do animal é obrigatório")
+    private int porteAnimal;
 
     public Integer getId() {
         return id;
@@ -152,22 +152,6 @@ public class Produto implements Serializable {
         this.idCategoria = idCategoria;
     }
 
-    public ETipoAnimal geteTipoAnimal() {
-        return eTipoAnimal;
-    }
-
-    public void setETipoAnimal(ETipoAnimal eTipoAnimal) {
-        this.eTipoAnimal = eTipoAnimal;
-    }
-
-    public EPorteAnimal getEPorteAnimal() {
-        return ePorteAnimal;
-    }
-
-    public void setEPorteAnimal(EPorteAnimal ePorteAnimal) {
-        this.ePorteAnimal = ePorteAnimal;
-    }
-
     public int getIdMarca() {
         return this.idMarca;
     }
@@ -175,4 +159,44 @@ public class Produto implements Serializable {
     public void setIdMarca(int idMarca) {
         this.idMarca = idMarca;
     }
+    
+    public int getTipoAnimal() {
+		return tipoAnimal;
+	}
+
+	public void setTipoAnimal(int tipoAnimal) {
+		this.tipoAnimal = tipoAnimal;
+	}
+
+	public int getPorteAnimal() {
+		return porteAnimal;
+	}
+
+	public void setPorteAnimal(int porteAnimal) {
+		this.porteAnimal = porteAnimal;
+	}
+	
+    public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
 }

@@ -13,8 +13,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "fornecedor")
+@Data
 public class Fornecedor implements Serializable {
 
     private static final long serialVersionUID = 1L;

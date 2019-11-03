@@ -1,8 +1,7 @@
 <html layout:decorate="~{header}">
-
+    <title>Cadastro de Marcas</title>
     <body>
         <main layout:fragment="conteudo">
-            <title>Cadastro de Marcas</title>
             <div class="main-panel ps-container ps-theme-default ps-active-y"
                  data-ps-id="1f824408-32f0-04a9-f7a5-3406fff7d60f">
                 <!-- Navbar -->
@@ -69,7 +68,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-2">
                                                     <label class="bmd-label-floating" for="inputState">Fornecedor</label>
-                                                    <select class="custom-select" required th:field="*{idFornecedor}">
+                                                    <select class="custom-select" required th:field="*{idFornecedor}" name="idFornecedor" id="idFornecedor">
                                                         <option th:each="i : ${fornecedores}" th:value="${i.id}" th:text="${i.nome}">
                                                     </select>
                                                 </div>
