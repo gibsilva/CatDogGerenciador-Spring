@@ -12,4 +12,9 @@ public class DashboardController {
     public String dashboard() {
         return "dashboard";
     }
+    
+    @GetMapping("/Pedidos/Lista")
+    public String listaPedidos() {
+        return "/pedidos/lista-pedidos";
+    }
 }
