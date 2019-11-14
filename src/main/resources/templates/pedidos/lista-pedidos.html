@@ -52,7 +52,7 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header card-header-info">
-                                        <h4 class="card-title ">Pedidos</h4>
+                                        <h3 class="card-title ">Pedidos</h3>
                                         <p class="card-category">Lista de pedidos feitos</p>
                                     </div>
                                     <div class="card-body">
@@ -76,26 +76,92 @@
                                                         <th class="text-center"><b>Quantidade de produtos</b></th>
                                                         <th class="text-center"><b>Forma de pagamento</b></th>
                                                         <th class="text-center"><b>Status</b></th>
-                                                        <th class="text-center"><b>Alterar</b></th>
+                                                        <th class="text-center"><b>Alterar Status</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="c : ${categorias}">
-                                                        <td th:text="${c.id}" class="text-center"></td>
-                                                        <td th:text="${c.id}" class="text-center"></td>
-                                                        <td th:text="${c.id}" class="text-center"></td>
-                                                        <td th:text="${c.id}" class="text-center"></td>
-                                                        <td th:text="${c.id}" class="text-center"></td>
-                                                        <td th:text="${c.nome}" class="text-center"></td>
-                                                        <td class="td-actions text-center">
-                                                            <a th:href="@{/categoria/alterar/{id}(id=${c.id})}" class="btn btn-link btn-success"
-                                                               data-toggle="tooltip" data-placement="left"
-                                                               title="Alterar Categoria">
-                                                                <i class="fas fa-pen"></i></a>
-                                                            <button type="button" rel="tooltip"
-                                                                    class="btn  btn-lg btn-link btn-danger">
-                                                                <i class="fas fa-times"></i>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td class="text-center">Antonio</td>
+                                                        <td class="text-center">123.123.123-12</td>
+                                                        <td class="text-center">2</td>
+                                                        <td class="text-center">Cartão de crédito</td>
+                                                        <td class="text-center">Aguardando pagamento</td>
+                                                        <td class="text-center">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                                <i class="material-icons">help_outline</i>
+                                                                Detalhes
                                                             </button>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog  modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel"><b>Pedido #1</b></h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-8">
+                                                                                    <label>Cliente</label>
+                                                                                    <input type="text" class="form-control" readonly>
+                                                                                </div>
+                                                                                <div class="col-4">
+                                                                                    <label>CPF</label>
+                                                                                    <input type="text" class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <table class="table table-no-more text-center">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th></th>
+                                                                                                <th>Produto</th>
+                                                                                                <th>Preço</th>
+                                                                                                <th>Quantidade</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td><img class="imgProdutoCarrinho" src="/img/card-product1.jpg"></td>
+                                                                                                <td> asd asd</td>
+                                                                                                <td> asd as</td>
+                                                                                                <td> asd asd</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <label>Forma de Pagamento</label>
+                                                                                    <input type="text" class="form-control" readonly>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <label>Status</label>
+                                                                                    <select class="custom-select">
+                                                                                        <option selected>Aguardando Pagamento</option>
+                                                                                        <option value="1">Nota Fiscal Emitida</option>
+                                                                                        <option value="2">Pedido em Transporte</option>
+                                                                                        <option value="3">Pedido Recebido</option>
+                                                                                        <option value="3">Pedido Entregue</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                            <button type="button" class="btn btn-info">Atualizar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
