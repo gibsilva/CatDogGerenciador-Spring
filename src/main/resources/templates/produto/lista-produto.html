@@ -80,38 +80,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tabela" name="tabela">
-                                                <c:forEach var="c" items="${produtos}">
-                                                    <tr>
-                                                        <td class="text-center">${c.id}</td>
-                                                        <td class="text-center">${c.nome}</td>
-                                                        <td class="text-center">
-                                                            <fmt:formatNumber value="${c.precoVenda}" type="currency">
-                                                            </fmt:formatNumber>
-                                                        </td>
-                                                        <td class="text-center">${c.quantidade}</td>
-                                                        <c:if test="${c.ativo == true}">
-                                                            <td class="text-center">Ativo</td>
-                                                        </c:if>
-                                                        <c:if test="${c.ativo == false}">
-                                                            <td class="text-center">Inativo</td>
-                                                        </c:if>
+                                                    <tr th:each="p : ${produtos}">
+                                                        <td class="text-center" th:text="${p.id}"></td>
+                                                        <td class="text-center" th:text="${p.nome}"></td>
+                                                        <td class="text-center" data-th-text="${#numbers.formatDecimal(p.precoVenda,1,'DEFAULT',2,'DEFAULT')}"></td>
+                                                        <td class="text-center" th:text="${p.quantidade}"></td>
+                                                        <td class="text-center" th:text="${p.ativo}? 'Ativo' : 'Inativo'"></td>
                                                         <td class="td-actions text-center">
-                                                            <c:url var="alterarProduto" value="/alterar-produto">
-                                                                <c:param name="id" value="${c.id}" />
-                                                            </c:url>
-                                                            <a href="${alterarProduto}" class="btn btn-success"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Alterar Produto"><i class="fas fa-pen"></i></a>
-                                                            <c:url var="detalhesProduto" value="/detalhes-produto">
-                                                                <c:param name="id" value="${c.id}" />
-                                                            </c:url>
-                                                            <a href="${detalhesProduto}" class="btn btn-warning"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Detalhes Produto"><i
-                                                                    class="material-icons">info</i></a>
-                                                        </td>
+                                                        <a th:href="@{/produto/alterar/{id}(id=${p.id})}" class="btn btn-link btn-success"
+                                                            data-toggle="tooltip" data-placement="left"
+                                                            title="Alterar Produto">
+                                                            <i class="fas fa-pen"></i></a>
+                                                        <button type="button" rel="tooltip"
+                                                            class="btn  btn-lg btn-link btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
                                                     </tr>
-                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
