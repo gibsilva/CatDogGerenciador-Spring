@@ -59,5 +59,45 @@ public class Marca implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Integer getIdFornecedor() {
+		return idFornecedor;
+	}
+
+	public void setIdFornecedor(Integer idFornecedor) {
+		this.idFornecedor = idFornecedor;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
     
 }
