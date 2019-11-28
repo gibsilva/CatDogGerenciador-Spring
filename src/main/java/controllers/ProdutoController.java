@@ -35,7 +35,6 @@ import repositorios.IProdutoRepositorio;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-	private final String CAMINHO = "C://uploads//";
     private final IProdutoRepositorio produtoRepositorio;
     private final ICategoriaRepositorio categoriaRepositorio;
     private final IMarcaRepositorio marcaRepositorio;
@@ -71,7 +70,7 @@ public class ProdutoController {
     	if (files.length <= 0)
     		bindingResult.reject("imagens", "Por favor insira pelo menos uma imagem");
     	
-    	File dir = new File(CAMINHO);
+    	File dir = new File(obterCaminho());
     	List<Imagem> imagens = new ArrayList<Imagem>();
     	for (int i = 0; i < files.length; i++) {
     		MultipartFile file = files[i];
@@ -138,5 +137,13 @@ public class ProdutoController {
         ModelAndView view = new ModelAndView("produto/detalhes-produto");
         view.addObject("produto", produtoRepositorio.findById(id));
         return view;
+    }
+    
+    public String obterCaminho() {
+    	String os = System.getProperty("os.name");
+    	if(os.toUpperCase().contains("windows".toUpperCase()))
+    		return "C://uploads//";
+    	else
+    		return "uploads//";
     }
 }
