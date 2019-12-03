@@ -1,19 +1,25 @@
-package controllers;
+	package controllers;
 
 import entidades.Imagem;
 import entidades.Produto;
 import entidades.enums.EPorteAnimal;
 import entidades.enums.ETipoAnimal;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -137,6 +143,30 @@ public class ProdutoController {
         ModelAndView view = new ModelAndView("produto/detalhes-produto");
         view.addObject("produto", produtoRepositorio.findById(id));
         return view;
+    }
+    
+    @GetMapping("/imagem/{id}")
+    public void getImageAsByteArray(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        BufferedOutputStream output = null;
+        try {
+        	Optional<Imagem> optImg = imagemRepositorio.findById(id);
+        	Imagem img = optImg.get();
+            fis = new FileInputStream(new File(img.getCaminho()));
+            bis = new BufferedInputStream(fis);
+            response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+            output = new BufferedOutputStream(response.getOutputStream());
+            for (int data; (data = bis.read()) > -1;) {
+                output.write(data);
+            }
+        } catch (IOException e) {
+
+        } finally {
+            fis.close();
+            bis.close();
+            output.close();
+        }
     }
     
     public String obterCaminho() {
