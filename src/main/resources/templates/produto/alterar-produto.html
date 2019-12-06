@@ -1,6 +1,5 @@
 <html layout:decorate="~{header}">
 <title>Cadastro de produto</title>
-
 <body>
     <main layout:fragment="conteudo">
         <div class="main-panel ps-container ps-theme-default ps-active-y"
@@ -50,7 +49,7 @@
                                     <p class="card-category">Adicione um novo produto</p>
                                 </div>
                                 <div class="card-body">
-                                    <form th:object="${produto}" th:action="@{/produto/alterar}" method="post" enctype="multipart/form-data">
+                                    <form id="frmAlterarProduto" th:object="${produto}" th:action="@{/produto/alterar}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" th:field="*{id}">
                                         <div class="form-group row">
                                             <div class="" th:if="${#fields.hasAnyErrors()}">
@@ -158,7 +157,7 @@
 		                                -->
                                         <br>
                                         <button type="submit" class="btn btn-success pull-right">Salvar</button>
-                                        <a href="/dashboard" type="" class="btn btn-danger pull-right">Cancelar</a>
+                                        <a href="/produto/lista" type="" class="btn btn-danger pull-right">Cancelar</a>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -180,6 +179,27 @@
         </div>
         
     <script th:inline="javascript">
+		var permissao = [[${session.usuarioLogado.permissao}]];
+		if(permissao === 'Auxiliar'){
+			document.getElementById("nomeProduto").readOnly = true;
+			document.getElementById("tipoAnimal").readOnly = true;
+			$('#tipoAnimal').prop('disabled', true);
+			$('#categoria').prop('disabled', true);
+			$('#porteAnimal').prop('disabled', true);
+			$('#marca').prop('disabled', true);
+			document.getElementById("descricao").readOnly = true;
+			document.getElementById("especificacao").readOnly = true;
+			document.getElementById("precoCompra").readOnly = true;
+			document.getElementById("precoVenda").readOnly = true;
+		}
+		
+		$('#frmAlterarProduto').submit(function (e) {
+			$('#tipoAnimal').prop('disabled', false);
+			$('#categoria').prop('disabled', false);
+			$('#porteAnimal').prop('disabled', false);
+			$('#marca').prop('disabled', false);
+		});
+	
         // FileInput
         $('.form-file-simple .inputFileVisible').click(function () {
             $(this).siblings('.inputFileHidden').trigger('click');
