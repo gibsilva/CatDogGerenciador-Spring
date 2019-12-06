@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidades.Login;
@@ -16,6 +17,7 @@ import entidades.Usuario;
 import repositorios.IUsuarioRepositorio;
 
 @Controller
+@RequestMapping("/")
 public class LoginController {
 	private final IUsuarioRepositorio usuarioRepositorio;
 	
@@ -24,7 +26,7 @@ public class LoginController {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
 	
-    @GetMapping("/login")
+	@GetMapping("/")
     public ModelAndView efetuaLogin(Login usuario){
         ModelAndView view = new ModelAndView("login");
         view.addObject("usuario", usuario);
@@ -54,7 +56,7 @@ public class LoginController {
         ModelAndView view;
         if(usuarioLogado != null){
             session.setAttribute("usuarioLogado", usuarioLogado);
-            view = new ModelAndView("redirect:/");
+            view = new ModelAndView("redirect:/dashboard/");
             view.addObject("usuarioLogado", usuarioLogado);
             return view;
         } else {
@@ -62,6 +64,12 @@ public class LoginController {
             bindingResult.reject("login", "Login inválido, verifique seu e-mail ou senha");
             return view;
         }
+    }
+    
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpSession session){
+    	session.invalidate();
+    	return new ModelAndView("redirect:/");
     }
     
 	private final Usuario autenticar(String email, String senha){

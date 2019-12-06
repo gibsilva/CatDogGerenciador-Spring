@@ -5,16 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/dashboard")
 public class DashboardController {
 
-    @GetMapping("/")
+	@GetMapping("/")
     public String dashboard() {
         return "dashboard";
-    }
-    
-    @GetMapping("/Pedidos/Lista")
-    public String listaPedidos() {
-        return "/pedidos/lista-pedidos";
     }
 }

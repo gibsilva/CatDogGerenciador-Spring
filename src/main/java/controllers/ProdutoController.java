@@ -127,7 +127,20 @@ public class ProdutoController {
         view.addObject("categorias", categoriaRepositorio.findAll());
         view.addObject("marcas", marcaRepositorio.findAll());
         view.addObject("produto", produtoRepositorio.findById(id));
+        view.addObject("tipoAnimais", ETipoAnimal.values());
+        view.addObject("porteAnimais", EPorteAnimal.values());
         return view;
+    }
+    
+    @PostMapping("/alterar")
+    public ModelAndView produtoAlterar(@ModelAttribute("produto") @Valid Produto produto,
+    		BindingResult bindingResult, RedirectAttributes redirAttr) {
+    	if(bindingResult.hasErrors())
+    		return new ModelAndView("produto/alterar-produto");
+    	else 
+    		produtoRepositorio.save(produto);
+    	
+    	return new ModelAndView("redirect:/produto/lista");
     }
 
     @GetMapping("/lista")

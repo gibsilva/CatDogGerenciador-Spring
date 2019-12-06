@@ -2,15 +2,7 @@
 <html layout:decorate="~{header}">
 
 <head>
-<title>Consulta de Pedidos</title>
-<script th:inline="javascript">	
-	function teste(i){
-		var index = Number(i);
-		var teste = [[${pedidos[0].data}]];
-		console.log(teste);
-		//console.log([[${pedidos[0].data}]]);
-	}
-</script>
+<title>Detalhes do Pedido</title>
 </head>
 
 <body>
@@ -22,7 +14,7 @@
 			class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
 			<div class="container-fluid">
 				<div class="navbar-wrapper">
-					<a class="navbar-brand" href="#pablo">Consulta de Pedidos</a>
+					<a class="navbar-brand" href="#pablo">Detalhes do Pedido</a>
 				</div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					aria-controls="navigation-index" aria-expanded="false"
@@ -60,61 +52,71 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header card-header-info">
-								<h3 class="card-title ">Pedidos</h3>
-								<p class="card-category">Lista de pedidos feitos</p>
+								
+							<p class="card-category">Detalhes do pedido</p>
 							</div>
-							<div class="card-body">
-								<span class="bmd-form-group col-md-8">
-									<div class="input-group no-border">
-										<input type="text" value="" class="form-control"
-											placeholder="Pesquisar">
-										<button type="submit"
-											class="btn btn-info btn-round btn-just-icon">
-											<i class="material-icons">search</i>
-											<div class="ripple-container"></div>
-										</button>
+							<form th:action="@{/pedido/alterar}" method="POST">
+								<div class="card-body">
+									<h3 class="title">Pedido <span data-th-text="${pedido.id}"></span></h3>
+									<input type="hidden" th:field="*{pedido.id}" name="idPedido">
+									<div class="row">
+										<div class="col-8">
+											<label>Cliente</label> <input type="text" class="form-control"
+												readonly th:field="*{pedido.cliente.nome}">
+										</div>
+										<div class="col-4">
+											<label>CPF</label> <input type="text" class="form-control"
+												readonly th:field="*{pedido.cliente.cpf}">
+										</div>
 									</div>
-								</span>
-
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-												<th class="text-center"><b>ID Pedido</b></th>
-												<th class="text-center"><b>Cliente</b></th>
-												<th class="text-center"><b>CPF</b></th>
-												<th class="text-center"><b>Qtde. de produtos</b></th>
-												<th class="text-center"><b>Forma de pagamento</b></th>
-												<th class="text-center"><b>Status</b></th>
-												<th class="text-center"><b>Alterar Status</b></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="p, i : ${pedidos}">
-												<td th:text="${p.id}" class="text-center"></td>
-												<td th:text="${p.cliente.nome}" class="text-center"></td>
-												<td th:text="${p.cliente.cpf}" class="text-center"></td>
-												<td th:text="${p.itensPedido.size()}" class="text-center"></td>
-												<td th:text="${p.getFormaPagamentoExtenso()}" class="text-center"></td>
-												<td th:text="${p.getStatusExtenso()}" class="text-center"></td>
-												<td class="text-center">
-													<!-- Button trigger modal 
-													<button type="button" th:onclick="'teste(\'' + ${i.index} + '\');'" class="btn btn-primary"
-														data-toggle="modal" data-target="#exampleModal">
-														<i class="material-icons">help_outline</i> Detalhes
-													</button>
-													-->
-													<a th:href="@{/pedido/detalhes/{id}(id=${p.id})}" class="btn btn-link btn-primary"
-                                                        data-toggle="tooltip" data-placement="left"
-                                                        title="Detalhes Pedido">
-                                                    <i class="fas fa-search"></i></a>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+									<br>
+									<div class="row">
+										<div class="col-12">
+											<table class="table table-no-more text-center">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Produto</th>
+														<th>Preço</th>
+														<th>Quantidade</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="p : ${pedido.itensPedido}">
+														<td><img class="imgProdutoCarrinho"
+															src="/img/card-product1.jpg"></td>
+														<td th:text="${p.produto.nome}"></td>
+														<td th:text="${p.produto.precoVenda}"></td>
+														<td th:text="${p.quantidade}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<label>Forma de Pagamento</label> <input type="text"
+												class="form-control" readonly th:value="*{pedido.getFormaPagamentoExtenso()}">
+										</div>
+										<div class="col-6">
+											<label>Status</label> 
+											<select class="custom-select" th:field="*{pedido.status}" id="statusPedido" name="statusPedido">
+												<option value="1">Criado</option>
+												<option value="2">Pagamento Autorizado</option>
+												<option value="3">Nota Fiscal Emitida</option>
+												<option value="4">Em transporte</option>
+												<option value="5">Pedido Entregue</option>
+											</select>
+										</div>
+									</div>														
 								</div>
-							</div>
+								<div class="container">
+									<button type="submit" class="btn btn-info">Atualizar</button>
+								</div>			
+								<br>				
+							</form>
 						</div>
+						
 					</div>
 				</div>
 			</div>
