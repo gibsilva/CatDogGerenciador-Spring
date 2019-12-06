@@ -3,14 +3,6 @@
 
 <head>
 <title>Consulta de Pedidos</title>
-<script th:inline="javascript">	
-	function teste(i){
-		var index = Number(i);
-		var teste = [[${pedidos[0].data}]];
-		console.log(teste);
-		//console.log([[${pedidos[0].data}]]);
-	}
-</script>
 </head>
 
 <body>
@@ -66,7 +58,7 @@
 							<div class="card-body">
 								<span class="bmd-form-group col-md-8">
 									<div class="input-group no-border">
-										<input type="text" value="" class="form-control"
+										<input id="filtro" type="text" value="" class="form-control"
 											placeholder="Pesquisar">
 										<button type="submit"
 											class="btn btn-info btn-round btn-just-icon">
@@ -89,7 +81,7 @@
 												<th class="text-center"><b>Alterar Status</b></th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="tabela">
 											<tr th:each="p, i : ${pedidos}">
 												<td th:text="${p.id}" class="text-center"></td>
 												<td th:text="${p.cliente.nome}" class="text-center"></td>
@@ -196,6 +188,21 @@
 		</div>
 
 	</div>
+	<script th:inline="javascript">	
+		$('#filtro').on('keyup', function () {
+			console.log('teste');
+		    var value = $(this).val();
+		    var patt = new RegExp(value, "i");
+		    $('#tabela').find('tr').each(function () {
+		        if (!($(this).find('td').text().search(patt) >= 0)) {
+		            $(this).not('.myHead').hide();
+		        }
+		        if (($(this).find('td').text().search(patt) >= 0)) {
+		            $(this).show();
+		        }
+		    });
+		});
+	</script>
 	</main>
 </body>
 
